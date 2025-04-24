@@ -1,0 +1,16 @@
+{
+  "devDependencies": {
+    "@types/node": "^20.4.3",
+    "@types/yargs": "^17.0.33",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.8.3"
+  },
+  "scripts": {
+    "build": "rimraf dist && tsc --project tsconfig.json",
+    "command": "rimraf dist && tsc --project tsconfig.json && node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "yargs": "^17.7.2"
+  }
+}
