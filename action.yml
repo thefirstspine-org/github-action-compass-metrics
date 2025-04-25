@@ -1,0 +1,11 @@
+name: 'Compass metrics'
+inputs:
+  command:
+    description: 'The command'
+    required: true
+    default: 'test'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.command }}
