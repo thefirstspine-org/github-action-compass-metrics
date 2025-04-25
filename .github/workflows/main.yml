@@ -1,16 +1,24 @@
 on: [workflow_dispatch, push]
 
+name: Compass Metrics
+description: 'GitHub Action to run Compass metrics commands'
+
+concurrency:
+  group: 'compass-metrics-${{ github.ref }}'
+  cancel-in-progress: true
+
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - name: Run the "test" command
-        id: test
         uses: thefirstspine-org/github-action-compass-metrics@master
         with:
           command: 'test'
+  availability:
+    runs-on: ubuntu-latest
+    steps:
       - name: Run the "availability" command
-        id: test
         uses: thefirstspine-org/github-action-compass-metrics@master
         with:
           command: 'availability'
@@ -19,8 +27,10 @@ jobs:
           gatewayDomain: 'thefirstspine.atlassian.net'
           metricSourceId: 'ari:cloud:compass:6ea2c72c-9b15-49d9-bd9d-72a5b6d1b3e1:metric-source/f792fe52-6af8-47ca-9398-ce0c44305c1b/e7709359-fec5-4196-99dd-6db104ffdc2c'
           serviceUrl: 'https://www.thefirstspine.fr'
+  open-vulnerabilities:
+    runs-on: ubuntu-latest
+    steps:
       - name: Run the "availability" command
-        id: test
         uses: thefirstspine-org/github-action-compass-metrics@master
         with:
           command: 'open-vulnerabilities'
@@ -31,3 +41,4 @@ jobs:
           serviceRepository: 'thefirstspine-org/arena.git'
           scanNpmVulnerabilities: true
           scanDockerVulnerabilities: true
+

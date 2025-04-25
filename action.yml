@@ -1,9 +1,32 @@
 name: 'Compass metrics'
 inputs:
   command:
-    description: 'The command'
     required: true
     default: 'test'
+  userEmail:
+    required: false
+    default: ''
+  userApiKey:
+    required: false
+    default: ''
+  gatewayDomain:
+    required: false
+    default: ''
+  metricSourceId:
+    required: false
+    default: ''
+  serviceUrl:
+    required: false
+    default: ''
+  serviceRepository:
+    required: false
+    default: ''
+  scanNpmVulnerabilities:
+    required: false
+    default: ''
+  scanDockerVulnerabilities:
+    required: false
+    default: ''
 runs:
   using: 'node20'
   main: 'dist/index.js'
