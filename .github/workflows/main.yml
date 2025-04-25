@@ -1,0 +1,11 @@
+on: [workflow_dispatch]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run the "test" command
+        id: test
+        uses: thefirstspine-org/github-action-compass-metrics
+        with:
+          command: 'test'
