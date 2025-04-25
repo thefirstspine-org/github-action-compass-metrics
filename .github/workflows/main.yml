@@ -6,6 +6,6 @@ jobs:
     steps:
       - name: Run the "test" command
         id: test
-        uses: thefirstspine-org/github-action-compass-metrics
+        uses: thefirstspine-org/github-action-compass-metrics@master
         with:
           command: 'test'
