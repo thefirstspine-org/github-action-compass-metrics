@@ -5,7 +5,7 @@ inputs:
     required: true
     default: 'test'
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: 'node20'
+  main: 'index.js'
   args:
     - ${{ inputs.command }}
