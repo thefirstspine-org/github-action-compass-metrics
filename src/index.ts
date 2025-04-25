@@ -1,11 +1,15 @@
 import { TestCommand } from "./commands/test.command";
 import { ICommand } from "./commands/command.interface";
+import { AvailabilityCommand } from "./commands/availability.command";
+import { OpenVulnerabilitiesCommand } from "./commands/open-vulnerabilities.command";
 
 const core = require('@actions/core');
 const github = require('@actions/github');
 
 const map: {[key: string]: ICommand} = {
     "test": new TestCommand(),
+    "availability": new AvailabilityCommand(),
+    "open-vulnerabilities": new OpenVulnerabilitiesCommand(),
 }
 
 async function bootstrap() {

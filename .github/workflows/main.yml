@@ -22,8 +22,8 @@ jobs:
         uses: thefirstspine-org/github-action-compass-metrics@master
         with:
           command: 'availability'
-          userEmail: ''
-          userApiKey: ''
+          userEmail: ${{ secrets.userEmail }}
+          userApiKey: ${{ secrets.userApiKey }}
           gatewayDomain: 'thefirstspine.atlassian.net'
           metricSourceId: 'ari:cloud:compass:6ea2c72c-9b15-49d9-bd9d-72a5b6d1b3e1:metric-source/f792fe52-6af8-47ca-9398-ce0c44305c1b/e7709359-fec5-4196-99dd-6db104ffdc2c'
           serviceUrl: 'https://www.thefirstspine.fr'
@@ -34,8 +34,8 @@ jobs:
         uses: thefirstspine-org/github-action-compass-metrics@master
         with:
           command: 'open-vulnerabilities'
-          userEmail: ''
-          userApiKey: ''
+          userEmail: ${{ secrets.userEmail }}
+          userApiKey: ${{ secrets.userApiKey }}
           gatewayDomain: 'thefirstspine.atlassian.net'
           metricSourceId: 'ari:cloud:compass:6ea2c72c-9b15-49d9-bd9d-72a5b6d1b3e1:metric-source/f792fe52-6af8-47ca-9398-ce0c44305c1b/14127aa2-bb0e-4506-9d59-fb8a873be754'
           serviceRepository: 'thefirstspine-org/arena.git'
