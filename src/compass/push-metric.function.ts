@@ -7,7 +7,7 @@ export async function pushMetric(
   metricSourceId: string,
   value: string,
 ): Promise<boolean> {
-    const url = `${gatewayDomain}/api/v1/metrics/${metricSourceId}`;
+    const url = `https://${gatewayDomain}/api/v1/metrics/${metricSourceId}`;
     try {
         const response = await axios.post(url, {
             headers: {

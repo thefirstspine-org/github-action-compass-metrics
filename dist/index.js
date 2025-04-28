@@ -130,7 +130,7 @@ exports.pushMetric = pushMetric;
 const axios_1 = __importDefault(__nccwpck_require__(7269));
 function pushMetric(atlassianUserEmail, atlassianUserApiKey, gatewayDomain, metricSourceId, value) {
     return __awaiter(this, void 0, void 0, function* () {
-        const url = `${gatewayDomain}/api/v1/metrics/${metricSourceId}`;
+        const url = `https://${gatewayDomain}/api/v1/metrics/${metricSourceId}`;
         try {
             const response = yield axios_1.default.post(url, {
                 headers: {
