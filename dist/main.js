@@ -22,6 +22,7 @@ const map = {
 function bootstrap() {
     return __awaiter(this, void 0, void 0, function* () {
         const name = core.getInput('command');
+        core.setOutput(`Running command: ${name}`);
         yield (map[name]).execute({
             userEmail: core.getInput('userEmail'),
             userApiKey: core.getInput('userApiKey'),
