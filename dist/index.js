@@ -137,8 +137,6 @@ function pushMetric(atlassianUserEmail, atlassianUserApiKey, gatewayDomain, metr
             timestamp: new Date().toISOString(),
         };
         console.log(`Pushing metric to ${url} with body:`, body);
-        console.log(`Using user: ${atlassianUserEmail}`);
-        console.log(`Using API key: ${atlassianUserApiKey}`);
         try {
             const response = yield axios_1.default.post(url, {
                 headers: {
