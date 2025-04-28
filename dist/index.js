@@ -131,17 +131,19 @@ const axios_1 = __importDefault(__nccwpck_require__(7269));
 function pushMetric(atlassianUserEmail, atlassianUserApiKey, gatewayDomain, metricSourceId, value) {
     return __awaiter(this, void 0, void 0, function* () {
         const url = `https://${gatewayDomain}/api/v1/metrics`;
+        const body = {
+            value,
+            metricSourceId,
+            timestamp: new Date().toISOString(),
+        };
+        console.log(`Pushing metric to ${url} with body:`, body);
         try {
             const response = yield axios_1.default.post(url, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Basic ${Buffer.from(`${atlassianUserEmail}:${atlassianUserApiKey}`).toString("base64")}`,
                 },
-                body: JSON.stringify({
-                    value,
-                    metricSourceId,
-                    timestamp: new Date().toISOString(),
-                }),
+                body: JSON.stringify(body),
             });
             return true;
         }
