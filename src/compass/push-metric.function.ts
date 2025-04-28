@@ -14,6 +14,8 @@ export async function pushMetric(
         timestamp: new Date().toISOString(),
     };
     console.log(`Pushing metric to ${url} with body:`, body);
+    console.log(`Using user: ${atlassianUserEmail}`);
+    console.log(`Using API key: ${atlassianUserApiKey}`);
     try {
         const response = await axios.post(url, {
             headers: {
