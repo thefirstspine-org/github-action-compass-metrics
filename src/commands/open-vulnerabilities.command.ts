@@ -7,8 +7,8 @@ export class OpenVulnerabilitiesCommand implements ICommand<IArgs> {
 }
 
 interface IArgs {
-  userEmail: string;
-  userApiKey: string;
+  atlassianUserEmail: string;
+  atlassianUserApiKey: string;
   gatewayDomain: string;
   metricSourceId: string;
   serviceRepository: string;

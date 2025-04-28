@@ -16,8 +16,8 @@ async function bootstrap() {
   const name: string = core.getInput('command');
   console.log(`Running command: ${name}`);
   await (map[name]).execute({
-    userEmail: core.getInput('userEmail'),
-    userApiKey: core.getInput('userApiKey'),
+    atlassianUserEmail: core.getInput('atlassianUserEmail'),
+    atlassianUserApiKey: core.getInput('atlassianUserApiKey'),
     metricSourceId: core.getInput('metricSourceId'),
     gatewayDomain: core.getInput('gatewayDomain'),
     serviceUrl: core.getInput('serviceUrl'),

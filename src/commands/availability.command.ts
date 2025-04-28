@@ -1,3 +1,4 @@
+import { pushMetric } from "../compass/push-metric.function";
 import { ICommand } from "./command.interface";
 import axios from "axios";
 
@@ -14,6 +15,13 @@ export class AvailabilityCommand implements ICommand<IArgs> {
         },
       });
       console.log(`Service response: ${response.status} - ${response.statusText}`);
+      pushMetric(
+        args.atlassianUserEmail,
+        args.atlassianUserApiKey,
+        args.gatewayDomain,
+        args.metricSourceId,
+        '1'
+      );
       return true;
     } catch (error) {
       // Handle the error and return false if the service is not available
@@ -24,8 +32,8 @@ export class AvailabilityCommand implements ICommand<IArgs> {
 }
 
 interface IArgs {
-  userEmail: string;
-  userApiKey: string;
+  atlassianUserEmail: string;
+  atlassianUserApiKey: string;
   gatewayDomain: string;
   metricSourceId: string;
   serviceUrl: string;

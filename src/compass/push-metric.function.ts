@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export async function pushMetric(
-  userEmail: string,
-  userApiKey: string,
+  atlassianUserEmail: string,
+  atlassianUserApiKey: string,
   gatewayDomain: string,
   metricSourceId: string,
   value: string,
@@ -12,10 +12,12 @@ export async function pushMetric(
         const response = await axios.post(url, {
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Basic ${Buffer.from(`${userEmail}:${userApiKey}`).toString("base64")}`,
+                "Authorization": `Basic ${Buffer.from(`${atlassianUserEmail}:${atlassianUserApiKey}`).toString("base64")}`,
             },
             body: JSON.stringify({
-                value: value,
+                value,
+                metricSourceId,
+                timestamp: new Date().toISOString(),
             }),
         });
         return true;

@@ -20,6 +20,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AvailabilityCommand = void 0;
+const push_metric_function_1 = __nccwpck_require__(2859);
 const axios_1 = __importDefault(__nccwpck_require__(7269));
 const core = __nccwpck_require__(7484);
 class AvailabilityCommand {
@@ -34,6 +35,7 @@ class AvailabilityCommand {
                     },
                 });
                 console.log(`Service response: ${response.status} - ${response.statusText}`);
+                (0, push_metric_function_1.pushMetric)(args.atlassianUserEmail, args.atlassianUserApiKey, args.gatewayDomain, args.metricSourceId, '1');
                 return true;
             }
             catch (error) {
@@ -106,6 +108,53 @@ exports.TestCommand = TestCommand;
 
 /***/ }),
 
+/***/ 2859:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.pushMetric = pushMetric;
+const axios_1 = __importDefault(__nccwpck_require__(7269));
+function pushMetric(atlassianUserEmail, atlassianUserApiKey, gatewayDomain, metricSourceId, value) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const url = `${gatewayDomain}/api/v1/metrics/${metricSourceId}`;
+        try {
+            const response = yield axios_1.default.post(url, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Basic ${Buffer.from(`${atlassianUserEmail}:${atlassianUserApiKey}`).toString("base64")}`,
+                },
+                body: JSON.stringify({
+                    value,
+                    metricSourceId,
+                    timestamp: new Date().toISOString(),
+                }),
+            });
+            return true;
+        }
+        catch (error) {
+            console.error("Error pushing metric:", error);
+            return false;
+        }
+    });
+}
+
+
+/***/ }),
+
 /***/ 7160:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -136,8 +185,8 @@ function bootstrap() {
         const name = core.getInput('command');
         console.log(`Running command: ${name}`);
         yield (map[name]).execute({
-            userEmail: core.getInput('userEmail'),
-            userApiKey: core.getInput('userApiKey'),
+            atlassianUserEmail: core.getInput('atlassianUserEmail'),
+            atlassianUserApiKey: core.getInput('atlassianUserApiKey'),
             metricSourceId: core.getInput('metricSourceId'),
             gatewayDomain: core.getInput('gatewayDomain'),
             serviceUrl: core.getInput('serviceUrl'),

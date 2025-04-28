@@ -3,10 +3,10 @@ inputs:
   command:
     required: true
     default: 'test'
-  userEmail:
+  atlassianUserEmail:
     required: false
     default: ''
-  userApiKey:
+  atlassianUserApiKey:
     required: false
     default: ''
   gatewayDomain:
