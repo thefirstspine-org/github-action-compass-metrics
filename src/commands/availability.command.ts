@@ -1,6 +1,8 @@
 import { ICommand } from "./command.interface";
 import axios from "axios";
 
+const core = require('@actions/core');
+
 export class AvailabilityCommand implements ICommand<IArgs> {
   async execute(args: IArgs): Promise<boolean> {
     try {
@@ -10,10 +12,11 @@ export class AvailabilityCommand implements ICommand<IArgs> {
           "Content-Type": "application/json",
         },
       });
+      core.setOutput(`Service response: ${response.status} - ${response.statusText}`);
       return true;
     } catch (error) {
       // Handle the error and return false if the service is not available
-      console.error("Service is not available:", error);
+      core.setFailed("Service is not available:", error);
       return false;
     }
   }

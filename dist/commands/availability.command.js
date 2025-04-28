@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AvailabilityCommand = void 0;
 const axios_1 = __importDefault(require("axios"));
+const core = require('@actions/core');
 class AvailabilityCommand {
     execute(args) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -24,11 +25,12 @@ class AvailabilityCommand {
                         "Content-Type": "application/json",
                     },
                 });
+                core.setOutput(`Service response: ${response.status} - ${response.statusText}`);
                 return true;
             }
             catch (error) {
                 // Handle the error and return false if the service is not available
-                console.error("Service is not available:", error);
+                core.setFailed("Service is not available:", error);
                 return false;
             }
         });
