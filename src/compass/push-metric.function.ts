@@ -7,7 +7,7 @@ export async function pushMetric(
   metricSourceId: string,
   value: string,
 ): Promise<boolean> {
-    const url = `https://${gatewayDomain}/api/v1/metrics`;
+    const url = `https://${gatewayDomain}/gateway/api/compass/v1/metrics`;
     const body = {
         value,
         metricSourceId,

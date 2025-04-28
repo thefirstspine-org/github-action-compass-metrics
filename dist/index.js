@@ -130,7 +130,7 @@ exports.pushMetric = pushMetric;
 const axios_1 = __importDefault(__nccwpck_require__(7269));
 function pushMetric(atlassianUserEmail, atlassianUserApiKey, gatewayDomain, metricSourceId, value) {
     return __awaiter(this, void 0, void 0, function* () {
-        const url = `https://${gatewayDomain}/api/v1/metrics`;
+        const url = `https://${gatewayDomain}/gateway/api/compass/v1/metrics`;
         const body = {
             value,
             metricSourceId,
