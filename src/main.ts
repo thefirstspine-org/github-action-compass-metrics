@@ -14,6 +14,7 @@ const map: {[key: string]: ICommand} = {
 
 async function bootstrap() {
   const name: string = core.getInput('command');
+  console.log(`Running command: ${name}`);
   core.setOutput(`Running command: ${name}`);
   await (map[name]).execute({
     userEmail: core.getInput('userEmail'),
