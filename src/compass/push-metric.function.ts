@@ -7,7 +7,7 @@ export async function pushMetric(
   metricSourceId: string,
   value: string,
 ): Promise<boolean> {
-    const url = `https://${gatewayDomain}/api/v1/metrics/${metricSourceId}`;
+    const url = `https://${gatewayDomain}/api/v1/metrics`;
     try {
         const response = await axios.post(url, {
             headers: {
@@ -21,8 +21,8 @@ export async function pushMetric(
             }),
         });
         return true;
-    } catch (error) {
-        console.error("Error pushing metric:", error);
+    } catch (error: any) {
+        console.error("Error pushing metric:", error.response ? error.response.data : error.message);
         return false;
     }
 }
