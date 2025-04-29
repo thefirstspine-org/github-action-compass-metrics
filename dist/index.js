@@ -35,7 +35,7 @@ class AvailabilityCommand {
                     },
                 });
                 console.log(`Service response: ${response.status} - ${response.statusText}`);
-                (0, push_metric_function_1.pushMetric)(args.atlassianUserEmail, args.atlassianUserApiKey, args.gatewayDomain, args.metricSourceId, 1);
+                (0, push_metric_function_1.pushMetric)(args.atlassianUserEmail, args.atlassianUserApiKey, args.gatewayDomain, args.metricSourceId, 100);
                 return true;
             }
             catch (error) {

@@ -20,7 +20,7 @@ export class AvailabilityCommand implements ICommand<IArgs> {
         args.atlassianUserApiKey,
         args.gatewayDomain,
         args.metricSourceId,
-        1
+        100
       );
       return true;
     } catch (error) {
