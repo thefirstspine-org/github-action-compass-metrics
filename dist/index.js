@@ -139,13 +139,11 @@ function pushMetric(atlassianUserEmail, atlassianUserApiKey, gatewayDomain, metr
         };
         console.log(`Pushing metric to ${url} with body:`, body);
         try {
-            const response = yield axios_1.default.post(url, {
+            const response = yield axios_1.default.post(url, body, {
                 headers: {
                     "Content-Type": "application/json",
                     "Accept": "application/json",
                 },
-                data: body,
-            }, {
                 auth: {
                     username: atlassianUserEmail,
                     password: atlassianUserApiKey,

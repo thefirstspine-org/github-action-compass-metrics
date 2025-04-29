@@ -15,18 +15,20 @@ export async function pushMetric(
     };
     console.log(`Pushing metric to ${url} with body:`, body);
     try {
-        const response = await axios.post(url, {
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-            },
-            data: body,
-        }, {
-            auth: {
-                username: atlassianUserEmail,
-                password: atlassianUserApiKey,
-            },
-        });
+        const response = await axios.post(
+            url,
+            body,
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                },
+                auth: {
+                    username: atlassianUserEmail,
+                    password: atlassianUserApiKey,
+                },
+            }
+        );
         return true;
     } catch (error: any) {
         console.error("Error pushing metric:", error.response ? error.response.data : error.message);
