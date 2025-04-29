@@ -33,6 +33,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: 'thefirstspine-org/arena'
+          token: ${{ secrets.ACCESS_TOKEN }}
       - name: Run the "availability" command
         uses: thefirstspine-org/github-action-compass-metrics@master
         with:
