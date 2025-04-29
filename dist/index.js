@@ -71,12 +71,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.OpenVulnerabilitiesCommand = void 0;
+const child_process_1 = __nccwpck_require__(5317);
 const fs_1 = __importDefault(__nccwpck_require__(9896));
 class OpenVulnerabilitiesCommand {
     execute(args) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log(`Trying to watch open vulnerabilities: ${args.path}`);
             console.log(fs_1.default.readdirSync(args.path));
+            const result = yield new Promise((resolve, reject) => {
+                (0, child_process_1.exec)(`cd ${args.path} && npm audit --json`, (error, stdout, stderr) => {
+                    if (error) {
+                        reject(error);
+                    }
+                    else {
+                        resolve(stdout);
+                    }
+                });
+            });
+            console.log(result);
             return true;
         });
     }

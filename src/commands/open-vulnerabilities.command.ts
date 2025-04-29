@@ -6,6 +6,18 @@ export class OpenVulnerabilitiesCommand implements ICommand<IArgs> {
   async execute(args: IArgs): Promise<boolean> {
     console.log(`Trying to watch open vulnerabilities: ${args.path}`);
     console.log(fs.readdirSync(args.path));
+    const result = await new Promise((resolve, reject) => {
+      exec(
+         `cd ${args.path} && npm audit --json`,
+         (error: ExecException | null, stdout: string, stderr: string) => {
+           if (error) {
+             reject(error);
+           } else {
+             resolve(stdout); 
+           }
+         });
+    });
+    console.log(result);
     return true;
   }
 }
