@@ -73,6 +73,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.OpenVulnerabilitiesCommand = void 0;
 const child_process_1 = __nccwpck_require__(5317);
 const fs_1 = __importDefault(__nccwpck_require__(9896));
+const push_metric_function_1 = __nccwpck_require__(2859);
 class OpenVulnerabilitiesCommand {
     execute(args) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -81,15 +82,24 @@ class OpenVulnerabilitiesCommand {
             const result = yield new Promise((resolve, reject) => {
                 (0, child_process_1.exec)(`cd ${args.path} && npm audit --json`, (error, stdout, stderr) => {
                     if (error) {
-                        console.log({ stdout, stderr, error });
-                        reject(error);
+                        resolve(stdout);
                     }
                     else {
                         resolve(stdout);
                     }
                 });
             });
-            console.log(result);
+            const vulnerabilities = JSON.parse(result).vulnerabilities;
+            const levels = ["high", "critical"];
+            let numVulnerabilities = 0;
+            Object.keys(vulnerabilities).forEach((key) => {
+                const vulnerability = vulnerabilities[key];
+                if (levels.includes(vulnerability.severity)) {
+                    console.log(`Vulnerability with severity ${vulnerability.severity} found: ${key}`);
+                    numVulnerabilities++;
+                }
+            });
+            (0, push_metric_function_1.pushMetric)(args.atlassianUserEmail, args.atlassianUserApiKey, args.gatewayDomain, args.metricSourceId, numVulnerabilities);
             return true;
         });
     }
