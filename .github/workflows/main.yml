@@ -38,7 +38,7 @@ jobs:
           repository: 'thefirstspine-org/github-action-compass-metrics'
           # repository: 'thefirstspine-org/arena'
           # token: ${{ secrets.ACCESS_TOKEN }}
-          # path: 'tmp'
+          path: 'tmp'
       - name: Run the "availability" command
         uses: thefirstspine-org/github-action-compass-metrics@master
         with:
