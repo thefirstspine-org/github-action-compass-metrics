@@ -144,7 +144,7 @@ function pushMetric(atlassianUserEmail, atlassianUserApiKey, gatewayDomain, metr
                     "Content-Type": "application/json",
                     "Accept": "application/json",
                 },
-                body: body,
+                data: body,
             }, {
                 auth: {
                     username: atlassianUserEmail,

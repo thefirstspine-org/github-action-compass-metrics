@@ -20,7 +20,7 @@ export async function pushMetric(
                 "Content-Type": "application/json",
                 "Accept": "application/json",
             },
-            body: body,
+            data: body,
         }, {
             auth: {
                 username: atlassianUserEmail,
