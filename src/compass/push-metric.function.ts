@@ -18,6 +18,7 @@ export async function pushMetric(
         const response = await axios.post(url, {
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "application/json",
             },
             body: JSON.stringify(body),
         }, {

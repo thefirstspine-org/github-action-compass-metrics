@@ -142,6 +142,7 @@ function pushMetric(atlassianUserEmail, atlassianUserApiKey, gatewayDomain, metr
             const response = yield axios_1.default.post(url, {
                 headers: {
                     "Content-Type": "application/json",
+                    "Accept": "application/json",
                 },
                 body: JSON.stringify(body),
             }, {
