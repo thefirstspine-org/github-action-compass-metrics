@@ -81,6 +81,7 @@ class OpenVulnerabilitiesCommand {
             const result = yield new Promise((resolve, reject) => {
                 (0, child_process_1.exec)(`cd ${args.path} && npm audit --json`, (error, stdout, stderr) => {
                     if (error) {
+                        console.log({ stdout, stderr, error });
                         reject(error);
                     }
                     else {

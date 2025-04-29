@@ -8,14 +8,15 @@ export class OpenVulnerabilitiesCommand implements ICommand<IArgs> {
     console.log(fs.readdirSync(args.path));
     const result = await new Promise((resolve, reject) => {
       exec(
-         `cd ${args.path} && npm audit --json`,
-         (error: ExecException | null, stdout: string, stderr: string) => {
-           if (error) {
-             reject(error);
-           } else {
-             resolve(stdout); 
-           }
-         });
+        `cd ${args.path} && npm audit --json`,
+        (error: ExecException | null, stdout: string, stderr: string) => {
+          if (error) {
+            console.log({stdout, stderr, error});
+              reject(error);
+            } else {
+              resolve(stdout); 
+            }
+        });
     });
     console.log(result);
     return true;
