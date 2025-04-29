@@ -14,14 +14,17 @@ export async function pushMetric(
         timestamp: new Date().toISOString(),
     };
     console.log(`Pushing metric to ${url} with body:`, body);
-    console.log(`Using ${Buffer.from(`${atlassianUserEmail}:${atlassianUserApiKey}`).toString("base64")}`);
     try {
         const response = await axios.post(url, {
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Basic ${Buffer.from(`${atlassianUserEmail}:${atlassianUserApiKey}`).toString("base64")}`,
             },
             body: JSON.stringify(body),
+        }, {
+            auth: {
+                username: atlassianUserEmail,
+                password: atlassianUserApiKey,
+            },
         });
         return true;
     } catch (error: any) {
