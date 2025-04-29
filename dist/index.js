@@ -53,7 +53,7 @@ exports.AvailabilityCommand = AvailabilityCommand;
 /***/ }),
 
 /***/ 1906:
-/***/ (function(__unused_webpack_module, exports) {
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
 
@@ -66,12 +66,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.OpenVulnerabilitiesCommand = void 0;
+const fs_1 = __importDefault(__nccwpck_require__(9896));
 class OpenVulnerabilitiesCommand {
     execute(args) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log(`Trying to watch open vulnerabilities: ${args.path}`);
+            console.log(fs_1.default.readdirSync(args.path));
             return true;
         });
     }

@@ -1,9 +1,11 @@
 import { exec, ExecException } from "child_process";
 import { ICommand } from "./command.interface";
+import fs from "fs";
 
 export class OpenVulnerabilitiesCommand implements ICommand<IArgs> {
   async execute(args: IArgs): Promise<boolean> {
     console.log(`Trying to watch open vulnerabilities: ${args.path}`);
+    console.log(fs.readdirSync(args.path));
     return true;
   }
 }
