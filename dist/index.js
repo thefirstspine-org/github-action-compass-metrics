@@ -151,7 +151,7 @@ function pushMetric(atlassianUserEmail, atlassianUserApiKey, gatewayDomain, metr
         }
         catch (error) {
             console.error("Error pushing metric:", error.response ? error.response.data : error.message);
-            throw error;
+            throw new Error(`Error pushing metric: ${JSON.stringify(error.response ? error.response.data : error.message)}`);
         }
     });
 }

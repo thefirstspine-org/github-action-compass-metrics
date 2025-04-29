@@ -26,6 +26,6 @@ export async function pushMetric(
         return true;
     } catch (error: any) {
         console.error("Error pushing metric:", error.response ? error.response.data : error.message);
-        throw error;
+        throw new Error(`Error pushing metric: ${JSON.stringify(error.response ? error.response.data : error.message)}`);
     }
 }
