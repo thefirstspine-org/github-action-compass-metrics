@@ -35,13 +35,13 @@ class AvailabilityCommand {
                     },
                 });
                 console.log(`Service response: ${response.status} - ${response.statusText}`);
-                (0, push_metric_function_1.pushMetric)(args.atlassianUserEmail, args.atlassianUserApiKey, args.gatewayDomain, args.metricSourceId, true);
+                (0, push_metric_function_1.pushMetric)(args.atlassianUserEmail, args.atlassianUserApiKey, args.gatewayDomain, args.metricSourceId, 1);
                 return true;
             }
             catch (error) {
                 // Handle the error and return false if the service is not available
                 console.log("Service is not available:", error);
-                (0, push_metric_function_1.pushMetric)(args.atlassianUserEmail, args.atlassianUserApiKey, args.gatewayDomain, args.metricSourceId, false);
+                (0, push_metric_function_1.pushMetric)(args.atlassianUserEmail, args.atlassianUserApiKey, args.gatewayDomain, args.metricSourceId, 0);
                 return false;
             }
         });
