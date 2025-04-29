@@ -26,6 +26,13 @@ export class AvailabilityCommand implements ICommand<IArgs> {
     } catch (error) {
       // Handle the error and return false if the service is not available
       console.log("Service is not available:", error);
+      pushMetric(
+        args.atlassianUserEmail,
+        args.atlassianUserApiKey,
+        args.gatewayDomain,
+        args.metricSourceId,
+        '0'
+      );
       return false;
     }
   }

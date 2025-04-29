@@ -41,6 +41,7 @@ class AvailabilityCommand {
             catch (error) {
                 // Handle the error and return false if the service is not available
                 console.log("Service is not available:", error);
+                (0, push_metric_function_1.pushMetric)(args.atlassianUserEmail, args.atlassianUserApiKey, args.gatewayDomain, args.metricSourceId, '0');
                 return false;
             }
         });
@@ -150,7 +151,7 @@ function pushMetric(atlassianUserEmail, atlassianUserApiKey, gatewayDomain, metr
         }
         catch (error) {
             console.error("Error pushing metric:", error.response ? error.response.data : error.message);
-            return false;
+            throw error;
         }
     });
 }
