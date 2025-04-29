@@ -53,7 +53,7 @@ exports.AvailabilityCommand = AvailabilityCommand;
 /***/ }),
 
 /***/ 1906:
-/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+/***/ (function(__unused_webpack_module, exports) {
 
 "use strict";
 
@@ -68,23 +68,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.OpenVulnerabilitiesCommand = void 0;
-const child_process_1 = __nccwpck_require__(5317);
 class OpenVulnerabilitiesCommand {
     execute(args) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log(`Trying to watch open vulnerabilities`);
-            console.log(`Trying to clone service repository: ${args.serviceRepository}`);
-            const result = yield new Promise((resolve, reject) => {
-                (0, child_process_1.exec)(`git clone git@github.com:${args.serviceRepository}.git`, (error, stdout, stderr) => {
-                    if (error) {
-                        reject(error);
-                    }
-                    else {
-                        resolve(stdout);
-                    }
-                });
-            });
-            console.log(`Command output: ${result}`);
+            console.log(`Trying to watch open vulnerabilities: ${args.path}`);
             return true;
         });
     }
@@ -210,7 +197,7 @@ function bootstrap() {
             metricSourceId: core.getInput('metricSourceId'),
             gatewayDomain: core.getInput('gatewayDomain'),
             serviceUrl: core.getInput('serviceUrl'),
-            serviceRepository: core.getInput('serviceRepository'),
+            path: core.getInput('path'),
             scanNpmVulnerabilities: core.getInput('scanNpmVulnerabilities'),
             scanDockerVulnerabilities: core.getInput('scanDockerVulnerabilities'),
         });

@@ -21,7 +21,7 @@ async function bootstrap() {
     metricSourceId: core.getInput('metricSourceId'),
     gatewayDomain: core.getInput('gatewayDomain'),
     serviceUrl: core.getInput('serviceUrl'),
-    serviceRepository: core.getInput('serviceRepository'),
+    path: core.getInput('path'),
     scanNpmVulnerabilities: core.getInput('scanNpmVulnerabilities'),
     scanDockerVulnerabilities: core.getInput('scanDockerVulnerabilities'),
   });
