@@ -20,7 +20,7 @@ export class AvailabilityCommand implements ICommand<IArgs> {
         args.atlassianUserApiKey,
         args.gatewayDomain,
         args.metricSourceId,
-        '1'
+        true
       );
       return true;
     } catch (error) {
@@ -31,7 +31,7 @@ export class AvailabilityCommand implements ICommand<IArgs> {
         args.atlassianUserApiKey,
         args.gatewayDomain,
         args.metricSourceId,
-        '0'
+        false
       );
       return false;
     }

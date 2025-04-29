@@ -5,7 +5,7 @@ export async function pushMetric(
   atlassianUserApiKey: string,
   gatewayDomain: string,
   metricSourceId: string,
-  value: string,
+  value: string |number | boolean,
 ): Promise<boolean> {
     const url = `https://${gatewayDomain}/gateway/api/compass/v1/metrics`;
     const body = {
@@ -20,7 +20,7 @@ export async function pushMetric(
                 "Content-Type": "application/json",
                 "Accept": "application/json",
             },
-            body: JSON.stringify(body),
+            body: body,
         }, {
             auth: {
                 username: atlassianUserEmail,
