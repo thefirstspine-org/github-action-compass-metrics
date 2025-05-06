@@ -16,37 +16,3 @@ jobs:
         uses: thefirstspine-org/github-action-compass-metrics@master
         with:
           command: 'test'
-  availability:
-    name: "Check availability of the service"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run the "availability" command
-        uses: thefirstspine-org/github-action-compass-metrics@master
-        with:
-          command: 'availability'
-          atlassianUserApiKey: ${{ secrets.ATLASSIAN_API_KEY }}
-          atlassianUserEmail: 'teddy@thefirstspine.fr'
-          gatewayDomain: 'thefirstspine.atlassian.net'
-          metricSourceId: 'ari:cloud:compass:6ea2c72c-9b15-49d9-bd9d-72a5b6d1b3e1:metric-source/f792fe52-6af8-47ca-9398-ce0c44305c1b/e7709359-fec5-4196-99dd-6db104ffdc2c'
-          serviceUrl: 'https://www.thefirstspine.fr'
-  open-vulnerabilities:
-    name: "Check open vulnerabilities of the service"
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          repository: 'thefirstspine-org/github-action-compass-metrics'
-          # repository: 'thefirstspine-org/arena'
-          # token: ${{ secrets.ACCESS_TOKEN }}
-          path: 'tmp'
-      - name: Run the "availability" command
-        uses: thefirstspine-org/github-action-compass-metrics@master
-        with:
-          command: 'open-vulnerabilities'
-          atlassianUserApiKey: ${{ secrets.ATLASSIAN_API_KEY }}
-          atlassianUserEmail: 'teddy@thefirstspine.fr'
-          gatewayDomain: 'thefirstspine.atlassian.net'
-          metricSourceId: 'ari:cloud:compass:6ea2c72c-9b15-49d9-bd9d-72a5b6d1b3e1:metric-source/f792fe52-6af8-47ca-9398-ce0c44305c1b/14127aa2-bb0e-4506-9d59-fb8a873be754'
-          scanNpmVulnerabilities: true
-          scanDockerVulnerabilities: true
-          path: 'tmp'
