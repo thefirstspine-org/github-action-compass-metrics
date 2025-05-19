@@ -1,7 +1,8 @@
 {
   "scripts": {
     "build": "rimraf dist && tsc --project tsconfig.json && ncc build dist/main.js --license licenses.txt --out dist && rimraf dist/main.js dist/commands dist/compass",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "command": "rimraf dist && tsc --project tsconfig.json && node dist/command.js"
   },
   "dependencies": {
     "@actions/core": "^1.11.1",
