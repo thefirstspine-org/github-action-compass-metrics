@@ -11,7 +11,7 @@ export class OpenVulnerabilitiesCommand implements ICommand<IArgs> {
     if (args.scanNpmVulnerabilities) {
       const result = await new Promise((resolve, reject) => {
         exec(
-          `cd ${args.path} && npm audit --json`,
+          `cd ${args.path} && npm audit --json --no-update-notifier`,
           (error: ExecException | null, stdout: string, stderr: string) => {
             if (error) {
                 resolve(stdout); 
@@ -20,15 +20,18 @@ export class OpenVulnerabilitiesCommand implements ICommand<IArgs> {
               }
           });
       });
-      const vulnerabilities = JSON.parse(result as string).vulnerabilities;
-      const levels = ["high", "critical"];
-      Object.keys(vulnerabilities).forEach((key) => {
-        const vulnerability = vulnerabilities[key];
-        if (levels.includes(vulnerability.severity)) {
-          console.log(`Vulnerability with severity ${vulnerability.severity} found: ${key}`);
-          numVulnerabilities++;
-        }
-      });
+      const json = JSON.parse(result as string);
+      if (json && json.vulnerabilities) {
+        const vulnerabilities = json.vulnerabilities;
+        const levels = ["high", "critical"];
+        Object.keys(vulnerabilities).forEach((key) => {
+          const vulnerability = vulnerabilities[key];
+          if (levels.includes(vulnerability.severity)) {
+            console.log(`Vulnerability with severity ${vulnerability.severity} found: ${key}`);
+            numVulnerabilities++;
+          }
+        });
+      }
     }
 
     if (args.scanDockerVulnerabilities) {

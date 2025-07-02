@@ -81,7 +81,7 @@ class OpenVulnerabilitiesCommand {
             let numVulnerabilities = 0;
             if (args.scanNpmVulnerabilities) {
                 const result = yield new Promise((resolve, reject) => {
-                    (0, child_process_1.exec)(`cd ${args.path} && npm audit --json`, (error, stdout, stderr) => {
+                    (0, child_process_1.exec)(`cd ${args.path} && npm audit --json --no-update-notifier`, (error, stdout, stderr) => {
                         if (error) {
                             resolve(stdout);
                         }
@@ -90,15 +90,18 @@ class OpenVulnerabilitiesCommand {
                         }
                     });
                 });
-                const vulnerabilities = JSON.parse(result).vulnerabilities;
-                const levels = ["high", "critical"];
-                Object.keys(vulnerabilities).forEach((key) => {
-                    const vulnerability = vulnerabilities[key];
-                    if (levels.includes(vulnerability.severity)) {
-                        console.log(`Vulnerability with severity ${vulnerability.severity} found: ${key}`);
-                        numVulnerabilities++;
-                    }
-                });
+                const json = JSON.parse(result);
+                if (json && json.vulnerabilities) {
+                    const vulnerabilities = json.vulnerabilities;
+                    const levels = ["high", "critical"];
+                    Object.keys(vulnerabilities).forEach((key) => {
+                        const vulnerability = vulnerabilities[key];
+                        if (levels.includes(vulnerability.severity)) {
+                            console.log(`Vulnerability with severity ${vulnerability.severity} found: ${key}`);
+                            numVulnerabilities++;
+                        }
+                    });
+                }
             }
             if (args.scanDockerVulnerabilities) {
                 const dockerfile = fs_1.default.readFileSync(`${args.path}/Dockerfile`);
