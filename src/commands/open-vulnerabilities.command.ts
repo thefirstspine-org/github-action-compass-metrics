@@ -20,6 +20,7 @@ export class OpenVulnerabilitiesCommand implements ICommand<IArgs> {
               }
           });
       });
+      console.log('Result: ' + (result as string));
       const json = JSON.parse(result as string);
       if (json && json.vulnerabilities) {
         const vulnerabilities = json.vulnerabilities;
@@ -54,6 +55,7 @@ export class OpenVulnerabilitiesCommand implements ICommand<IArgs> {
           });
       });
       const reportFile = fs.readFileSync('trivy-report.json');
+      console.log('Result: ' + reportFile.toString());
       const reportJson = JSON.parse(reportFile.toString());
       reportJson.Results.forEach((r: any) => {
         if (typeof(r?.Vulnerabilities?.length) != 'undefined') {

@@ -90,6 +90,7 @@ class OpenVulnerabilitiesCommand {
                         }
                     });
                 });
+                console.log('Result: ' + result);
                 const json = JSON.parse(result);
                 if (json && json.vulnerabilities) {
                     const vulnerabilities = json.vulnerabilities;
@@ -122,6 +123,7 @@ class OpenVulnerabilitiesCommand {
                     });
                 });
                 const reportFile = fs_1.default.readFileSync('trivy-report.json');
+                console.log('Result: ' + reportFile.toString());
                 const reportJson = JSON.parse(reportFile.toString());
                 reportJson.Results.forEach((r) => {
                     var _a;
