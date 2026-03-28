@@ -113,7 +113,7 @@ class OpenVulnerabilitiesCommand {
                 }
                 console.log(`Trying to find vulnerabilities from ${version[1]}:${version[2]}`);
                 yield new Promise((resolve, reject) => {
-                    (0, child_process_1.exec)(`docker run --rm aquasec/trivy image --severity CRITICAL ${version[1]}:${version[2]} -f json -q > trivy-report.json`, (error, stdout, stderr) => {
+                    (0, child_process_1.exec)(`docker run --rm aquasec/trivy:0.69.2 image --severity CRITICAL ${version[1]}:${version[2]} -f json -q > trivy-report.json`, (error, stdout, stderr) => {
                         if (error) {
                             resolve(stdout);
                         }

@@ -45,7 +45,7 @@ export class OpenVulnerabilitiesCommand implements ICommand<IArgs> {
       console.log(`Trying to find vulnerabilities from ${version[1]}:${version[2]}`);
       await new Promise((resolve, reject) => {
         exec(
-          `docker run --rm aquasec/trivy image --severity CRITICAL ${version[1]}:${version[2]} -f json -q > trivy-report.json`,
+          `docker run --rm aquasec/trivy:0.69.2 image --severity CRITICAL ${version[1]}:${version[2]} -f json -q > trivy-report.json`,
           (error: ExecException | null, stdout: string, stderr: string) => {
             if (error) {
                 resolve(stdout); 
